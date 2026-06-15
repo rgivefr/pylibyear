@@ -1,11 +1,12 @@
 import asyncio
+from importlib.metadata import version
 from typing import Optional
 
 import typer
 from httpx import AsyncClient
 from typing_extensions import Annotated
 
-from libyear.__about__ import __version__
+__version__ = version("pylibyear")
 from libyear.results import (
     Results,
     calculate_results,
@@ -13,14 +14,12 @@ from libyear.results import (
     results_to_stdout,
 )
 from libyear.toml import load_requirements_from_toml
-from libyear.utils import (
-    load_requirements,
-    validate_file_path,
-)
+from libyear.utils import load_requirements
 
 app = typer.Typer()
 
 client = AsyncClient(http2=True)
+
 
 def version_callback(value: bool):
     """
@@ -99,8 +98,6 @@ def render_results(json: str, sort: bool, requirements: set) -> Results:
     """
     Render the results to the console or to a file
     """
-    if json:
-        validate_file_path(json)
     data = asyncio.run(calculate_results(requirements, sort))
     if json:
         results_to_json(data=data, file_name=json)
@@ -111,5 +108,4 @@ def render_results(json: str, sort: bool, requirements: set) -> Results:
 
 
 if __name__ == "__main__":
-    with client:
-        app()
+    app()

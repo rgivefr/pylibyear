@@ -14,6 +14,12 @@ https://libyear.com/
 
 ## How to install
 
+Using uvx
+
+```bash
+uvx --from pylibyear libyear --help
+```
+
 Using pip
 
 ```bash
@@ -113,11 +119,17 @@ J. Cox, E. Bouwers, M. van Eekelen and J. Visser, Measuring Dependency Freshness
 To install dependencies
 
 ```bash
-uv pip install -r pyproject.toml --all-extras
+uv sync --all-extras
 ```
 
 Then run this command to install in editable mode for local development
 
 ```bash
 uv pip install -e .
+```
+
+Available `justfile` recipes:
+
+```bash
+just
 ```
