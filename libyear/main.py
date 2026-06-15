@@ -53,9 +53,7 @@ def text(
     sort: Annotated[
         bool, typer.Option(help="Sort by years behind, in descending order")
     ] = False,
-    fail_over: Annotated[
-        int, typer.Option(help="Fail over a certain age")
-    ] = 0
+    fail_over: Annotated[int, typer.Option(help="Fail over a certain age")] = 0,
 ):
     """
     The text command reads a requirements.txt file and prints a table with the
